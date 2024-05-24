@@ -1,15 +1,27 @@
 import tkinter as Tk
 from PIL import Image, ImageTk
 
+root=Tk.Tk()
+root.title("Example of a button")
+root.geometry("800x800")
+root.configure(background="IndianRed1")
+Label1 = Tk.Label(root,text="WORLD WAR II",
+               font=("Impact", 50),
+               bg= "IndianRed1")
+Label1.pack(pady = 20)
+Label1.place(x=1000, y=100)
+
 def Main_page():
     root=Tk.Tk()
     root.title("Example of a button")
     root.geometry("800x800")
     root.configure(background="IndianRed1")
+    
     Label1 = Tk.Label(root,text="WORLD WAR II",
                font=("Impact", 50),
                bg= "IndianRed1")
     Label1.pack(pady = 20)
+    Label1.place(x=1000, y=100)
 
     def Overview():
         root.destroy()
@@ -35,8 +47,16 @@ def Main_page():
 
     root.mainloop()
 
+
+Information = Tk.Tk()
+Information.title("Overview")
+Information.geometry("800x800")
+
 def Overview_Page():
-    Overview = Tk.Tk()
-    Overview.title("Overview")
-    Overview.geometry("800x800")
+    Information = Tk.Tk()
+    Information.title("Overview")
+    Information.geometry("800x800")
     
+    
+    
+    Information.mainloop()
