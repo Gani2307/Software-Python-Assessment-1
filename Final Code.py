@@ -1,45 +1,40 @@
 import tkinter as tk
+from tkinter import messagebox 
 from PIL import Image, ImageTk
 
-current_score_index = 0
+current_question_index = 0
 score = 0
 
 Questions = [
+    
+        "What year did World War II start?",
+        "When did World War II end?",
+        "Which country was not part of the Axis Powers in World War II?",
+        "Who was the Prime Minister of the United Kingdom during most of World War II?",
+        "Which event led to the United States entering World War II?",
+        "What year did World War II start?",
+    
+]
 
+Options = [
     {
-        "Question": "What year did World War II start?",
         "options": ["1939", "1941", "1942", "1945"],
-        "answer": "1939"
-    },
-    {
-        "Question": "When did World War II end?",
         "options": ["1945", "1946", "1947", "1948"],
-        "answer": "1945"
-    },
-    {
-        "Question": "Which country was not part of the Axis Powers in World War II?",
-        "options": ["Germany", "Japan", "Italy", "France"],
-        "answer": "France"
-    },
-    {
-        "question": "Who was the Prime Minister of the United Kingdom during most of World War II?",
+        "options": None,
         "options": ["Winston Churchill", "Neville Chamberlain", "Clement Attlee", "Stanley Baldwin"],
-        "answer": "Winston Churchill"
-    },
-    {
-        "Question": "Which event led to the United States entering World War II?",
         "options": ["Attack on Pearl Harbor", "Battle of Stalingrad", "D-Day", "Bombing of Hiroshima"],
-        "answer": "Attack on Pearl Harbor"
-    },
-    {
-        "Question": "What year did World War II start?",
         "options": ["1939", "1941", "1942", "1945"],
-        "answer": "1939"
-    },
+    }
+]
+
+Answers = [
     {
-        "Question": "When did World War II end?",
-        "options": ["1945", "1946", "1947", "1948"],
-        "answer": "1945"
+        "answer": "1939",
+        "answer": "1945",
+        "answer": "France" "france",
+        "answer": "Winston Churchill",
+        "answer": "Attack on Pearl Harbor",
+        "answer": "1939"
     }
 ]
 
@@ -77,8 +72,8 @@ def Main_page():
     Start_Quiz_button.place(x=100,y=400)
    
 
-    button3 = tk.Button(homepage, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=homepage.destroy)
-    button3.place(x=455, y=410)
+    Exit_button = tk.Button(homepage, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=homepage.destroy)
+    Exit_button.place(x=455, y=410)
 
     homepage.mainloop()
     
@@ -105,35 +100,62 @@ def Open_Overview ():
     Information.mainloop()
 
 selected_option = None
-
+Answer_Entry = []
 
 
 def Open_Quiz ():
-    global current_score_index, score
-    current_score_index = 0
+    global current_question_index, score
+    current_question_index = 0
     score = 0
-    Question = tk.Tk()
-    Question.title("WORLD WAR II")
-    Question.geometry("1000x700")
-    Question.configure(background="IndianRed1") 
-    Question.resizable(False, False)
+    Quiz = tk.Tk()
+    Quiz.title("WORLD WAR II")
+    Quiz.geometry("1000x700")
+    Quiz.configure(background="khaki3") 
+    Quiz.resizable(False, False)
 
+    Quiz_Title = tk.Label(Quiz, text="Quiz", font=("Impact", 45), bg='khaki3', padx=20, pady=10, borderwidth=2)
+    Quiz_Title.pack()
+
+    def Get_Question(input_question):
+        global Answer_Entry
+        Questions.config(text = input_question["Questions"])
+        options = input_question["options"]  
+    
+        if options: 
+            for i, option in enumerate(options):
+                tk.Button(Quiz, text = option, font = ("Impact", 20))
+        else:
+            Answer_box = tk.Entry(Quiz, font = ("Arial", 15))
+            Answer_box.place(x=100, y=200)
+    
     def Check_Answer(selected_option):
-        global current_question_index, score
-        print(current_question_index)
-        Correct_Answer = Questions[current_question_index]["Answer"]
+        global score
+        Correct_Answer = Answers[current_question_index]
+        if selected_option == Correct_Answer:
+            messagebox.showinfo("Correct!")
+        else:
+            messagebox.showerror("Incorrect", f"The correct answer is {Correct_Answer}")
 
-    def Back_Page ():
-        Question.destroy()
-        Main_page()
+    def Next_Question():
+        global current_question_index
+        current_question_index += 1
+        if current_question_index < len(Questions):
+            Get_Question(Questions[current_question_index])
+        else:
+            Final_Score()
+    
+    Correct_Answers = 0
+    
+    def Final_Score():
+        final_screen = tk.Toplevel(Quiz)
+        final_screen.title("Results")
+        final_screen.geometry("500x300")
+        final_screen.configure(background='navajo white')
 
-    Back_button = tk.Button(Question, text = "Back", bg ="lightgreen", font=("Arial", 15), command=Back_Page)
-    Back_button.pack()
+        score_label = tk.Label(final_screen, text=f"Your score is {Correct_Answers}/{len(Questions)}", font=("Impact", 20), bg="khaki3")
+        score_label.pack()
 
- 
-
-
-
-
+    question_label = tk.Label(Quiz, text=Questions[current_question_index], font=("Arial", 15))
+    question_label.pack()
 
 Main_page()     
