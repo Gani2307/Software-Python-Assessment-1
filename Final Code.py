@@ -73,7 +73,7 @@ def Main_page():
     homepage.mainloop()
     
 
-
+# OVERVIEW PAGE
 def Open_Overview ():
     Information = tk.Tk()
     Information.title("WORLD WAR II")
@@ -94,9 +94,16 @@ def Open_Overview ():
 
     Information.mainloop()
 
+
+
+# START THE QUIZ 
 Answer_Entry = []
 current_question_index = 0
 score = 0
+
+def Back_to_Home():
+     Open_Quiz.destroy()
+     Main_page()
 
 def Check_Answer(selected_option):
         global score
@@ -123,7 +130,7 @@ def Get_Question():
     question_label.config(text=Questions[current_question_index])
     for button in Answer_Entry:
         button.destroy()
-        Answer_Entry.clear()
+        Answer_Entry = []
     for i, option in enumerate(Options[current_question_index]):
         Answer_Entry.append(tk.Button(quiz_frame, text=option, command=lambda selected_option=i: Check_Answer(selected_option)))
         Answer_Entry[i].pack()
@@ -136,6 +143,9 @@ def Final_Score():
     Score_Page.title("Results")
     Score_Page.geometry("500x300")
     Score_Page.configure(background='navajo white')
+
+    Score = tk.Label(Score_Page, text=f"Your score is {score}/{len(Questions)}", font=("Impact", 20), bg="khaki3")
+    Score.pack()
 
 def Open_Quiz():
     global quiz, quiz_frame, question_label, Answer_Entry
@@ -154,6 +164,11 @@ def Open_Quiz():
     question_label = tk.Label(quiz_frame, text=Questions[current_question_index], font=("Arial", 15))
     question_label.pack()
 
+    Exit_button = tk.Button(quiz, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=quiz.destroy)
+    Exit_button.place(x=455, y=410)
+
+
+
     Get_Question()
 
     quiz.mainloop()
@@ -161,25 +176,16 @@ def Open_Quiz():
     Quiz_Title = tk.Label(quiz, text="Quiz", font=("Impact", 45), bg='khaki3', padx=20, pady=10, borderwidth=2)
     Quiz_Title.pack()
     
-
-
     
-
-
-    
-
-    Score = tk.Label(quiz, text=f"Your score is {score}/{len(Questions)}", font=("Impact", 20), bg="khaki3")
-    Score.pack()
 
     question_label = tk.Label(quiz, text=Questions[current_question_index], font=("Arial", 15))
     question_label.pack()
 
-    next_button = tk.Button(quiz, text="Next", command=Next_Question)
-    next_button.place(x=100, y=300)
-
     Exit_button = tk.Button(quiz, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=quiz.destroy)
     Exit_button.place(x=455, y=410)
 
+    Main_Menu_button = tk.Button(quiz, text="Main Menu", height=3, width=15, bg ='gray20', fg ='white', command=Back_to_Home)
+    Main_Menu_button.place(x=455, y=410)
 
     Get_Question()
 
