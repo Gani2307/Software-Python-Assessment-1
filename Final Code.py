@@ -2,9 +2,6 @@ import tkinter as tk
 from tkinter import messagebox 
 from PIL import Image, ImageTk
 
-current_question_index = 0
-score = 0
-
 Questions = [
     
         "What year did World War II start?",
@@ -20,7 +17,7 @@ Options = [
     
          ["1939", "1941", "1942", "1945"],
          ["1945", "1946", "1947", "1948"],
-         None,
+         ["France", "Germany", "United Kingdom", "Russia"],
          ["Winston Churchill", "Neville Chamberlain", "Clement Attlee", "Stanley Baldwin"],
          ["Attack on Pearl Harbor", "Battle of Stalingrad", "D-Day", "Bombing of Hiroshima"],
          ["1939", "1941", "1942", "1945"],
@@ -28,14 +25,12 @@ Options = [
 ]
 
 Answers = [
-    {
-        "1939",
-        "1945",
-        "France" "france",
-        "Winston Churchill",
-        "Attack on Pearl Harbor",
-        "1939"
-    }
+    "1939",
+    "1945",
+    "France",
+    "Winston Churchill",
+    "Attack on Pearl Harbor",
+    "1939"
 ]
 
 
@@ -99,7 +94,7 @@ def Open_Overview ():
 
     Information.mainloop()
 
-selected_option = None
+selected_option = ()
 Answer_Entry = []
 
 
@@ -116,21 +111,18 @@ def Open_Quiz ():
     Quiz_Title = tk.Label(Quiz, text="Quiz", font=("Impact", 45), bg='khaki3', padx=20, pady=10, borderwidth=2)
     Quiz_Title.pack()
     
+
+
     def Check_Answer(selected_option):
-        global score
         Correct_Answer = Answers[current_question_index]
         if selected_option == Correct_Answer:
-            messagebox.showinfo("Correct!")
+            messagebox.showinfo("Correct!", "This is the correct answer!")
         else:
             messagebox.showerror("Incorrect", f"The correct answer is {Correct_Answer}")
 
 
-
-    q = tk.StringVar()
-
     def Next_Question():
         global current_question_index
-        selected_answer = q.get() if Options[current_question_index] else selected_option.get()
         current_question_index += 1
         if current_question_index < len(Questions):
             Get_Question()
@@ -139,13 +131,15 @@ def Open_Quiz ():
 
     def Get_Question():
         global Answer_Entry
-        question_label.config(text = Questions[current_question_index])
+        question_label.config(text=Questions[current_question_index])
         for button in Answer_Entry:
             button.destroy()
         Answer_Entry = []
         for i, option in enumerate(Options[current_question_index]):
-            Answer_Entry.append(tk.Button(Quiz, text=option, command=lambda choice=option: Check_Answer(selected_option)))
+            Answer_Entry.append(tk.Button(Quiz, text=option, command=lambda choice=option: Check_Answer(option)))  
             Answer_Entry[i].pack()
+
+
     Correct_Answers = 0
     
     def Final_Score():
@@ -162,6 +156,9 @@ def Open_Quiz ():
 
     next_button = tk.Button(Quiz, text="Next", command=Next_Question)
     next_button.place(x=100, y=300)
+
+    Exit_button = tk.Button(Quiz, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=Quiz.destroy)
+    Exit_button.place(x=455, y=410)
 
 
     Get_Question()
