@@ -40,12 +40,13 @@ def Main_page():
     homepage=tk.Tk()
     homepage.title("WORLD WAR II")
     homepage.geometry("1000x700")
-    homepage.configure(background="Khaki3")
+    homepage.configure(background="#1F2833")
     homepage.resizable(False, False)
     
-    Title =tk.Label(homepage,text="WORLD WAR II", font=("Impact", 50), bg = "Khaki3")
+    Title =tk.Label(homepage,text="WORLD WAR II", font=("Impact", 50), bg = "#1F2833")
+    Title.config(fg="#66FCF1")
     Title.pack()
-    Title.place(x=490, y=50)
+    Title.place(x=310, y=50)
 
 
 
@@ -60,15 +61,15 @@ def Main_page():
 
 
     # Code for Buttons
-    Overview_button = tk.Button(homepage,text="Overview", bg ="lightgreen", font=("Arial", 30), command = Overview)
-    Overview_button.place(x=100,y=500)
+    Overview_button = tk.Button(homepage,text="Overview", bg ="IndianRed1", font=("Arial", 15), height = 1, width = 7, command = Overview)
+    Overview_button.place(x=50,y=553)
     
-    Start_Quiz_button = tk.Button(homepage,text="Start Quiz", bg ="lightgreen", font=("Arial", 30), command=Quiz)
-    Start_Quiz_button.place(x=100,y=400)
+    Start_Quiz_button = tk.Button(homepage,text="Start Quiz", bg ="lightgreen", font=("Arial", 15), height = 1, width = 8, command=Quiz)
+    Start_Quiz_button.place(x=800,y=550)
    
 
-    Exit_button = tk.Button(homepage, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=homepage.destroy)
-    Exit_button.place(x=455, y=410)
+    Exit_button = tk.Button(homepage, text="Exit", bg ='goldenrod2', fg ='black',font=("Arial", 15), width = 7, height = 1, command=homepage.destroy)
+    Exit_button.place(x=425, y=550)
 
     homepage.mainloop()
     
@@ -151,7 +152,8 @@ def Open_Quiz():
     global quiz, quiz_frame, question_label, Answer_Entry
     quiz = tk.Tk()
     quiz.title("WORLD WAR II")
-    quiz.geometry("1000x700")
+    quiz.geometry("1200x700+100+100")
+    
     quiz.configure(background="khaki3")
     quiz.resizable(False, False)
 
@@ -167,7 +169,8 @@ def Open_Quiz():
     Exit_button = tk.Button(quiz, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=quiz.destroy)
     Exit_button.place(x=455, y=410)
 
-
+    Main_Menu_button = tk.Button(quiz, text="Main Menu", height=3, width=15, bg ='gray20', fg ='white', command=Back_to_Home)
+    Main_Menu_button.place(x=355, y=410)
 
     Get_Question()
 
@@ -184,8 +187,7 @@ def Open_Quiz():
     Exit_button = tk.Button(quiz, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=quiz.destroy)
     Exit_button.place(x=455, y=410)
 
-    Main_Menu_button = tk.Button(quiz, text="Main Menu", height=3, width=15, bg ='gray20', fg ='white', command=Back_to_Home)
-    Main_Menu_button.place(x=455, y=410)
+
 
     Get_Question()
 
