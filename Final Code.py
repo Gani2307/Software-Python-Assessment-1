@@ -117,6 +117,10 @@ def Open_Overview ():
     Overview_title.config(fg="#66FCF1")
     Overview_title.place(x=340, y=50)
 
+    Overview_Information = tk.Label(Information, text = "After Germany invaded Poland in 1939, the world saw the outbreak of World War II, which lasted until 1945. \n During most of the war, Winston Churchill served as Prime Minister of the United Kingdom, encouraging the \n country with his motivational speeches. The devastation caused by the 1941  attack on Pearl Harbor led the \n United States to ally with the Allies in opposition to the Axis Powers and enter the war. The Royal Air Force fought \n the Luftwaffe in the Battle of Britain, mostly from the air. An important moment in European history was the landing \n of Allied forces in Normandy  on D-Day in 1944. Japan's quick surrender and the end of the Pacific War were \n facilitated by the use of atomic weapons. China and Japan had been at war for four years prior to Pearl Harbor. \n Japan was ruled by Emperor Hirohito during the war. The American attempt to create an atomic weapon \n was known as the Manhattan Project. The Japanese attacked ships and planes during Pearl Harbor, but \n they notably left aircraft carriers unharmed. The code name for Germany's invasion of the Soviet Union was \n Operation Barbarossa. Blood, Toil, Tears, and Sweat is a quote from Winston Churchill's first speech as prime \n minister, which conveys determination in the face of difficulties.", bg = "#1F2833", font = ("Arial", 15))
+    Overview_Information.config(fg = "#66FCF1")
+    Overview_Information.pack(pady = 200)
+
 
 
     def Back_Page ():
