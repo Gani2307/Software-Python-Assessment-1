@@ -4,23 +4,40 @@ from PIL import Image, ImageTk
 
 Questions = [
     
-        "What year did World War II start?",
-        "When did World War II end?",
-        "Which country was not part of the Axis Powers in World War II?",
-        "Who was the Prime Minister of the United Kingdom during most of World War II?",
-        "Which event led to the United States entering World War II?",
-        "What year did World War II start?",
-    
+        "1. What year did World War II start?",
+        "2. When did World War II end?",
+        "3. Which country was not part of the Axis Powers in World War II?",
+        "4. Who was the Prime Minister of the United Kingdom during most of World War II?",
+        "5. Did the United States enter World War II before or after the attack on Pearl Harbor",
+        "6. Did Germany invade Poland in 1939?",
+        "7. Was the Battle of Britain primarily fought in the air?",
+        "8. Which Allied forces landed in Normandy on D-Day?",
+        "9. What was the outcome of the use of atomic bombs in Japan?",
+        "10. Japan had been at war for four years prior to the attack on Pearl Harbor with which country?",
+        "11. The Japanese emperor during World War II was...?",
+        "12.  What was the name of the American effort to build an atomic bomb?",
+        "13. How many aircraft carriers did the Japanese destroy during their attack on Pearl Harbor?",
+        "14. What was the code name of the German invasion of the Soviet Union?",
+        "15. Which of the following is NOT a Winston Churchill speech?"
+        
 ]
-
 Options = [
     
-         ["1939", "1941", "1942", "1945"],
-         ["1945", "1946", "1947", "1948"],
-         ["France", "Germany", "United Kingdom", "Russia"],
-         ["Winston Churchill", "Neville Chamberlain", "Clement Attlee", "Stanley Baldwin"],
-         ["Attack on Pearl Harbor", "Battle of Stalingrad", "D-Day", "Bombing of Hiroshima"],
-         ["1939", "1941", "1942", "1945"],
+         ["1942", "1941", "1939", "1945"],
+         ["1946", "1945", "1947", "1948"],
+         ["United Kingdom", "Germany", "France", "Russia"],
+         ["Stanley Baldwin", "Neville Chamberlain", "Clement Attlee", "Winston Churchill"],
+         ["Before", "After"],
+         ["True", "False"],
+         ["Aerial bombings", "Naval Engagements", "Ground Battle", "Trench Warfare"],
+         ["British and French", "British and Canadian", "American and British", "American and Canadian"],
+         ["Japan surrendered immediately", "Japan launched a counterattack", "Japan sought a conditional surrender", "Japan ignored the bombs"],
+         ["China", "Indonesia", "Cambodia"],
+         ["Hirohito", "Hiroshima", "Hiromatsu", "Tojo"],
+         ["The Baltimore Project", "The Chicago Project", "The Manhattan Project", "The Philadelphia Project"],
+         ["1", "6", "4", "10"],
+         ["Operation Barbarossa", "Operation Overlord", "Operation Sea Lion", "Operation Torch"],
+         ["I have nothing to offer but blood, toil, tears and sweat", "This was their finest hour", "We have nothing to fear but fear itself", "We shall fight on the beaches"]
     
 ]
 
@@ -29,8 +46,17 @@ Answers = [
     "1945",
     "France",
     "Winston Churchill",
-    "Attack on Pearl Harbor",
-    "1939"
+    "After",
+    "True",
+    "Aerial bombings",
+    "American and British",
+    "Japan surrendered immediately",
+    "China",
+    "Hirohito",
+    "The Manhattan Project",
+    "6",
+    "Operation Barbarossa",
+    "We have nothing to fear but fear itself"
 ]
 
 
@@ -50,6 +76,7 @@ def Main_page():
 
 
 
+
 # Code for Button Functions
     def Overview():
         homepage.destroy()
@@ -61,14 +88,17 @@ def Main_page():
 
 
     # Code for Buttons
-    Overview_button = tk.Button(homepage,text="Overview", bg ="IndianRed1", font=("Arial", 15), height = 1, width = 7, command = Overview)
+    Overview_button = tk.Button(homepage,text="Overview", bg ="#1F2833", font=("Arial", 15), fg = "white", height = 1, width = 7, command = Overview)
+    Overview_button.config(fg = "#66FCF1")
     Overview_button.place(x=50,y=553)
     
-    Start_Quiz_button = tk.Button(homepage,text="Start Quiz", bg ="lightgreen", font=("Arial", 15), height = 1, width = 8, command=Quiz)
+    Start_Quiz_button = tk.Button(homepage,text="Start Quiz", bg ="#1F2833", font=("Arial", 15), height = 1, width = 8, command=Quiz)
+    Start_Quiz_button.config(fg = "#66FCF1")
     Start_Quiz_button.place(x=800,y=550)
    
 
-    Exit_button = tk.Button(homepage, text="Exit", bg ='goldenrod2', fg ='black',font=("Arial", 15), width = 7, height = 1, command=homepage.destroy)
+    Exit_button = tk.Button(homepage, text="Exit", bg ='#1F2833',font=("Arial", 15), width = 7, height = 1, command=homepage.destroy)
+    Exit_button.config(fg = "#66FCF1")
     Exit_button.place(x=425, y=550)
 
     homepage.mainloop()
@@ -76,22 +106,37 @@ def Main_page():
 
 # OVERVIEW PAGE
 def Open_Overview ():
+    global Information
     Information = tk.Tk()
     Information.title("WORLD WAR II")
     Information.geometry("1000x700")
-    Information.configure(background="IndianRed1")
+    Information.configure(background="#1F2833")
     Information.resizable(False, False)
+
+    Overview_title =tk.Label(Information,text="OVERVIEW", font=("Impact", 50), bg = "#1F2833")
+    Overview_title.config(fg="#66FCF1")
+    Overview_title.place(x=340, y=50)
 
 
 
     def Back_Page ():
         Information.destroy()
         Main_page()
+    
+    def Start_Quiz_page():
+         Information.destroy()
+         Open_Quiz()
 
 
+    Back_button = tk.Button(Information, text = "Back", bg ="#1F2833", font=("Arial", 15), width = 7, height = 1, command=Back_Page)
+    Back_button.config(fg="#66FCF1")
+    Back_button.place(x=50,y=553)
 
-    Back_button = tk.Button(Information, text = "Back", bg ="lightgreen", font=("Arial", 15), command=Back_Page)
-    Back_button.place(x=100, y=400)
+    Start_Quiz_button = tk.Button(Information,text="Start Quiz", bg ="#1F2833", font=("Arial", 15), height = 1, width = 8, command=Start_Quiz_page)
+    Start_Quiz_button.config(fg = "#66FCF1")
+    Start_Quiz_button.place(x=800,y=550)
+
+    
 
     Information.mainloop()
 
@@ -127,56 +172,58 @@ def Next_Question():
             Final_Score()
 
 def Get_Question():
-    global Answer_Entry
+    global Answer_Entry, score
     question_label.config(text=Questions[current_question_index])
     for button in Answer_Entry:
         button.destroy()
         Answer_Entry = []
     for i, option in enumerate(Options[current_question_index]):
-        Answer_Entry.append(tk.Button(quiz_frame, text=option, command=lambda selected_option=i: Check_Answer(selected_option)))
-        Answer_Entry[i].pack()
-
-
-        Correct_Answers = 0
+        Answer_Entry.append(tk.Button(quiz_frame, text=option, command=lambda selected_option=i: Check_Answer(selected_option), width = 45, height = 2, font = ("Arial", 15), bg = "#66FCF1"))
+        Answer_Entry[i].pack(pady = 10)
     
 def Final_Score():
     Score_Page = tk.Toplevel(quiz)
     Score_Page.title("Results")
-    Score_Page.geometry("500x300")
-    Score_Page.configure(background='navajo white')
+    Score_Page.geometry("1000x700")
+    Score_Page.configure(background="#1F2833")
 
-    Score = tk.Label(Score_Page, text=f"Your score is {score}/{len(Questions)}", font=("Impact", 20), bg="khaki3")
+    Score = tk.Label(Score_Page, text=f"Your score is {score}/{len(Questions)}", font=("Impact", 20), bg="#1F2833")
+    Score.config(fg = "#66FCF1")
     Score.pack()
+
+    percentage = (score / len(Questions)) * 100
+    percentage_label = tk.Label(Score_Page, text=f"Percentage: {percentage:.2f}%", font=("Impact", 20), bg="#1F2833")
+    percentage_label.config(fg = "#66FCF1")
+    percentage_label.pack(pady=10)
 
 def Open_Quiz():
     global quiz, quiz_frame, question_label, Answer_Entry
     quiz = tk.Tk()
     quiz.title("WORLD WAR II")
     quiz.geometry("1200x700+100+100")
-    
-    quiz.configure(background="khaki3")
+    quiz.configure(background="#1F2833")
     quiz.resizable(False, False)
 
-    quiz_title = tk.Label(quiz, text="Quiz", font=("Impact", 45), bg='khaki3', padx=20, pady=10, borderwidth=2)
+    quiz_title = tk.Label(quiz, text="QUIZ", font=("Impact", 45), bg="#1F2833", padx=20, pady=10, borderwidth=2)
+    quiz_title.config(fg="#66FCF1")
     quiz_title.pack()
 
-    quiz_frame = tk.Frame(quiz, bg="khaki3")
+    quiz_frame = tk.Frame(quiz, bg="#1F2833")
     quiz_frame.pack(pady=20)
 
-    question_label = tk.Label(quiz_frame, text=Questions[current_question_index], font=("Arial", 15))
-    question_label.pack()
+    question_label = tk.Label(quiz_frame, text=Questions[current_question_index], font=("Arial", 15), bg = "#1F2833")
+    question_label.config(fg="#66FCF1")
+    question_label.pack(pady = 20, padx = (0))
 
-    Exit_button = tk.Button(quiz, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=quiz.destroy)
-    Exit_button.place(x=455, y=410)
-
-    Main_Menu_button = tk.Button(quiz, text="Main Menu", height=3, width=15, bg ='gray20', fg ='white', command=Back_to_Home)
-    Main_Menu_button.place(x=355, y=410)
+    Exit_button = tk.Button(quiz, text="Exit", bg ='#1F2833',font=("Arial", 15), width = 7, height = 1, command=quiz.destroy)
+    Exit_button.config(fg = "#66FCF1")
+    Exit_button.place(x=425, y=550)
 
     Get_Question()
 
     quiz.mainloop()
 
-    Quiz_Title = tk.Label(quiz, text="Quiz", font=("Impact", 45), bg='khaki3', padx=20, pady=10, borderwidth=2)
+    Quiz_Title = tk.Label(quiz, text="Quiz", font=("Impact", 45), bg="#1F2833", padx=20, pady=10, border_width=2)
     Quiz_Title.pack()
     
     
@@ -184,8 +231,7 @@ def Open_Quiz():
     question_label = tk.Label(quiz, text=Questions[current_question_index], font=("Arial", 15))
     question_label.pack()
 
-    Exit_button = tk.Button(quiz, text="Exit", height=3, width=15, bg ='gray20', fg ='white', command=quiz.destroy)
-    Exit_button.place(x=455, y=410)
+
 
 
 
