@@ -140,6 +140,10 @@ def Open_Overview ():
     Start_Quiz_button.config(fg = "#66FCF1")
     Start_Quiz_button.place(x=800,y=550)
 
+    Exit_button= tk.Button(Information, text="Exit", bg ='#1F2833',font=("Arial", 15), width = 7, height = 1, command=Information.destroy)
+    Exit_button.config(fg = "#66FCF1")
+    Exit_button.place(x=425, y=550)
+
     
 
     Information.mainloop()
@@ -151,9 +155,7 @@ Answer_Entry = []
 current_question_index = 0
 score = 0
 
-def Back_to_Home():
-     Open_Quiz.destroy()
-     Main_page()
+
 
 def Check_Answer(selected_option):
         global score
@@ -199,6 +201,10 @@ def Final_Score():
     percentage_label = tk.Label(Score_Page, text=f"Percentage: {percentage:.2f}%", font=("Impact", 20), bg="#1F2833")
     percentage_label.config(fg = "#66FCF1")
     percentage_label.pack(pady=10)
+
+    Exit_button = tk.Button(Score_Page, text="Exit", bg ='#1F2833',font=("Arial", 15), width = 7, height = 1, command=Score_Page.destroy)
+    Exit_button.config(fg = "#66FCF1")
+    Exit_button.place(x=425, y=550)
 
 def Open_Quiz():
     global quiz, quiz_frame, question_label, Answer_Entry
